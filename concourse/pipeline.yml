@@ -1,0 +1,16 @@
+resources:
+- name: spring-concourse-demo
+  type: git
+  check_every: 10s
+  source:
+    uri: https://github.com/pivotal-andreas-schillinger/spring-concourse-demo.git
+    branch: master
+
+jobs:
+- name: build
+  public: true
+  plan:
+  - get: spring-concourse-demo
+    trigger: true
+  - task: Build project
+    file: demo/concourse/tasks/build.yml
